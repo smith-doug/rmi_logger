@@ -97,7 +97,7 @@ RmiLogger::DebugEx::~DebugEx()
   if (!str.empty())
   {
     std::stringstream lss;
-    lss << module_name_ << ":" << ns_ << " " << str;
+    lss << "[" << module_name_ << "." << ns_ << "] " << str;
 
     ros::console::setLogLocationLevel(&loc_, level_);
     ros::console::checkLogLocationEnabled(&loc_);
