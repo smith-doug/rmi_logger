@@ -42,11 +42,11 @@
 
 // I was trying to get away from using defines, but the only way to get the __FILE__ etc info is from the preprocessor.
 // Call these link member functions, logger_.DEBUG() << "blah";
-#define DEBUG() DEBUG_(__FILE__, __LINE__, __ROSCONSOLE_FUNCTION__)
-#define INFO() INFO_(__FILE__, __LINE__, __ROSCONSOLE_FUNCTION__)
-#define WARN() WARN_(__FILE__, __LINE__, __ROSCONSOLE_FUNCTION__)
-#define ERROR() ERROR_(__FILE__, __LINE__, __ROSCONSOLE_FUNCTION__)
-#define FATAL() FATAL_(__FILE__, __LINE__, __ROSCONSOLE_FUNCTION__)
+#define DEBUG() _DEBUG(__FILE__, __LINE__, __ROSCONSOLE_FUNCTION__)
+#define INFO() _INFO(__FILE__, __LINE__, __ROSCONSOLE_FUNCTION__)
+#define WARN() _WARN(__FILE__, __LINE__, __ROSCONSOLE_FUNCTION__)
+#define ERROR() _ERROR(__FILE__, __LINE__, __ROSCONSOLE_FUNCTION__)
+#define FATAL() _FATAL(__FILE__, __LINE__, __ROSCONSOLE_FUNCTION__)
 
 namespace rmi_log
 {
@@ -116,27 +116,27 @@ public:
   };
 
 public:
-  DebugEx DEBUG_(const char* file = 0, int line = 0, const char* function = 0)
+  DebugEx _DEBUG(const char* file = 0, int line = 0, const char* function = 0)
   {
     return DebugEx(module_name_, ns_, log_location, Level::Debug, file, line, function);
   }
 
-  DebugEx INFO_(const char* file = 0, int line = 0, const char* function = 0)
+  DebugEx _INFO(const char* file = 0, int line = 0, const char* function = 0)
   {
     return DebugEx(module_name_, ns_, log_location, Level::Info, file, line, function);
   }
 
-  DebugEx WARN_(const char* file = 0, int line = 0, const char* function = 0)
+  DebugEx _WARN(const char* file = 0, int line = 0, const char* function = 0)
   {
     return DebugEx(module_name_, ns_, log_location, Level::Warn, file, line, function);
   }
 
-  DebugEx ERROR_(const char* file = 0, int line = 0, const char* function = 0)
+  DebugEx _ERROR(const char* file = 0, int line = 0, const char* function = 0)
   {
     return DebugEx(module_name_, ns_, log_location, Level::Error, file, line, function);
   }
 
-  DebugEx FATAL_(const char* file = 0, int line = 0, const char* function = 0)
+  DebugEx _FATAL_(const char* file = 0, int line = 0, const char* function = 0)
   {
     return DebugEx(module_name_, ns_, log_location, Level::Error, file, line, function);
   }
@@ -150,8 +150,8 @@ public:
   }
 
   std::string getName()
-  {   
-    return module_name_ + ":" + ns_; 
+  {
+    return module_name_ + "." + ns_;
   }
 
 private:
