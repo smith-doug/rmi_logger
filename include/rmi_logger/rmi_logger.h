@@ -102,20 +102,6 @@ public:
       return *this;
     }
 
-    // Doesn't really work since the state variables are created in the macro, all instances will share the same
-    // throttle
-    //    DebugEx& throttle(int rate)
-    //    {
-    //      throttle_ = rate;
-    //      return *this;
-    //    }
-
-    /*template <typename... Args>
-    void print(const char* fmt, Args const&... args)
-    {
-      ROS_ERROR(fmt, args...);
-    }*/
-
   private:
     std::string module_name_;
     std::string ns_;
@@ -163,20 +149,9 @@ public:
     setLoggerLevel(Level::Fatal);
   }
 
-  /*std::string getName()
-  {
-    std::string ns_name = ns_;
-    if (*ns_name.begin() == '/')
-      ns_name.erase(0, 1);
-    return module_name_ + ns_name;
-  }*/
-
   std::string getName()
-  {
-    // std::string ns_name = boost::replace_all_copy(ns_, "/", "");
-    // ns_name = ns_;
-    return module_name_ + ":" + ns_;
-    // return ns_name;
+  {   
+    return module_name_ + ":" + ns_; 
   }
 
 private:

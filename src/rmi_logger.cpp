@@ -34,7 +34,7 @@ namespace rmi_log
 RmiLogger::RmiLogger(const std::string& module_name, const std::string& ns) : module_name_(module_name), ns_(ns)
 {
   ROSCONSOLE_AUTOINIT;
-  log_location = { false, false, ::ros::console::levels::Count, 0 };
+  log_location = { false, false, ::ros::console::levels::Count, nullptr };
 
   ros::console::initializeLogLocation(&log_location, std::string(ROSCONSOLE_NAME_PREFIX) + "." + getName(),
                                       ros::console::levels::Info);
@@ -96,13 +96,6 @@ RmiLogger::DebugEx::~DebugEx()
 
   if (!str.empty())
   {
-    //    auto log_name = getName();
-    //    if (throttle_ > 0)
-    //    {
-    //      ROS_ERROR_STREAM_THROTTLE_NAMED(throttle_, log_name, log_name << " " << str);
-    //      return;
-    //    }
-
     std::stringstream lss;
     lss << module_name_ << ":" << ns_ << " " << str;
 
